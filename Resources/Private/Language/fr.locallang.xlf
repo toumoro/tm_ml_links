@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2018-01-18T16:22:59Z" product-name="tm_ml_links">
+		<header/>
+		<body>
+			<trans-unit id="bytes" xml:space="preserve" approved="yes">
+				<source>bytes</source>
+				<target>octets</target>
+			</trans-unit>
+			<trans-unit id="KB" xml:space="preserve" approved="yes">
+				<source>KB</source>
+				<target>Ko</target>
+			</trans-unit>
+			<trans-unit id="MB" xml:space="preserve" approved="yes">
+				<source>MB</source>
+				<target>Mo</target>
+			</trans-unit>
+			<trans-unit id="GB" xml:space="preserve" approved="yes">
+				<source>GB</source>
+				<target>Go</target>
+			</trans-unit>
+			<trans-unit id="TB" xml:space="preserve" approved="yes">
+				<source>TB</source>
+				<target>To</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

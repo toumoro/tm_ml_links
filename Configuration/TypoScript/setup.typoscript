@@ -1,0 +1,367 @@
+# ==============================================
+# FE-Plugin configuration for EXT:news
+# ==============================================
+plugin.tx_tmmllinks {
+baseFolder= 
+replaceDomain=
+            separator = &nbsp;
+	
+		## definition for external links
+            externalDomain {
+                    1 {
+                            domain = http://en.wikipedia.org
+                            10.image = EXT:tm_ml_links/Resources/Public/Icons/domains/wikipedia.png
+                            10.image.link = 0
+                            20.linkTag = 1
+                    }
+
+                    2 {
+                            domain = http://fr.wikipedia.org
+                            10.image = EXT:tm_ml_links/Resources/Public/Icons/domains/wikipedia.png
+                            10.image.link = 0
+                            20.linkTag = 1
+                    }
+
+                    3 {
+                            domain = http://typo3.org
+                            10.image = EXT:tm_ml_links/Resources/Public/Icons/domains/typo3.png
+                            10.image.link = 0
+                            20.linkTag = 1
+                    }
+            }
+
+            external {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/globe.gif
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            ##external.10.image.doc = EXT:tm_ml_links/Resources/Public/Icons/external/doc.png
+            ##external.10.image.pdf = EXT:tm_ml_links/Resources/Public/Icons/external/pdf.png
+
+            mailto {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/ICO_courriel.svg
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+                    ## Filetypes: Security
+            asc {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/asc.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            cer {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/cer.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            gpg {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/gpg.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+                    ## Filetypes: Archives
+            bz2 {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/bz2.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            deb {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/deb.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            gz {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/gz.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            t3x {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/t3x.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            tgz {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/tgz.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            zip {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/zip.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+                    ## Filetypes: MS Office
+            doc {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/doc.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            docx {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/docx.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            pps {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pps.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            ppt {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/ppt.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            pptx {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pptx.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            vsd {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/vsd.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            xls {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xls.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+            xlsx {
+                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xlsx.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+                    ## Filetypes: Programming Languages
+            c {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/c.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            cpp {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/cpp.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            h {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/h.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            java {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/java.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            vhd {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/vhd.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+                    ## Filetypes: LaTeX and Cie
+            dvi {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/dvi.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            pdf {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pdf.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    ##30.filesize = 1
+            }
+
+
+
+            pl {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/txt.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            ps {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/ps.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            tex {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/tex.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+                    ## Filetypes: Multimedia
+            mid {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/mid.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            mov {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/mov.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            mp3 {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/mp3.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            m4a {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/m4a.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            mpg {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/mpeg.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            wav {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/wav.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+                    ## Filetypes: Pictures
+            eps {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/eps.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            gif {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/gif.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            jpg {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/jpg.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            png {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/png.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            psd {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/psd.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+                    ## Filetypes: Miscealleous
+            dtd {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/dtd.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            exe {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/exe.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            patch {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/txt.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            diff {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/txt.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            sh {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/sh.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+
+            sql {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/txt.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            txt {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/txt.png
+                    10.image.link = 0
+                    20.linkTag = 1
+                    30.filesize = 1
+            }
+
+            xml {
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xml.png
+                    10.image.link = 0
+                    20.linkTag = 1
+            }
+}

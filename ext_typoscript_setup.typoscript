@@ -1,0 +1,24 @@
+tt_content.text.20.parseFunc.tags.link.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+tt_content.text.20.parseFunc.tags.link.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+tt_content.text.20.parseFunc.tags.a.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+tt_content.text.20.parseFunc.tags.a.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+
+tt_content.text.20.parseFunc.tags.typolist.default.parseFunc.tags.link.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+tt_content.text.20.parseFunc.tags.typolist.default.parseFunc.tags.link.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+tt_content.text.20.parseFunc.tags.typolist.default.parseFunc.tags.a.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+tt_content.text.20.parseFunc.tags.typolist.default.parseFunc.tags.a.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+
+lib.parseFunc.tags.link.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+lib.parseFunc.tags.link.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+lib.parseFunc.tags.a.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+lib.parseFunc.tags.a.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+lib.parseFunc.tags.media =< lib.parseFunc_RTE.tags.media
+
+lib.parseFunc_RTE.tags.link.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+lib.parseFunc_RTE.tags.link.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+
+lib.parseFunc_RTE.tags.a.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+lib.parseFunc_RTE.tags.a.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
+
+lib.parseFunc_RTE.tags.media.tag.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
+lib.parseFunc_RTE.tags.media.tag.typolink.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
