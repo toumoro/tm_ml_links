@@ -7,7 +7,7 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Toumoro',
     'author_email' => '',
     'state' => 'stable',
-    'version' => '1.0.0',
+    'version' => '12.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.0-12.4.99',
@@ -19,4 +19,3 @@ $EM_CONF[$_EXTKEY] = [
         'psr-4' => array('Toumoro\\TmMlLinks\\' => 'Classes')
     ],*/
 ];
-
