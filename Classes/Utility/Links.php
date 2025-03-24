@@ -2,24 +2,16 @@
 
 namespace Toumoro\TmMlLinks\Utility;
 
-use AllowDynamicProperties;
-use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
-
-#[AllowDynamicProperties]
 class Links
 {
-
     /**
      * Main action
      *
      */
     public function main($content, $conf)
     {
-        $this->settings = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getSetupArray()['plugin.']['tx_tmmllinks.'];
 
+        $this->settings = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_tmmllinks.'];
 
         $fileType = $GLOBALS['TSFE']->register['fileType'];
         $linkType = $GLOBALS['TSFE']->register['linkType'];
@@ -28,29 +20,10 @@ class Links
         // Use given seperator
         $this->separator = isset($this->settings['separator']) ? $this->settings['separator'] : ' ';
         $this->tag = '';
-        $proddomain = $this->settings['replaceDomain'];
+
         // Go through configuration and modify the link
-        if (!empty($proddomain)) {
-
-            if (($linkType == 'url') && ((strpos($url, $_SERVER['HTTP_HOST']) > -1) || (strpos($url, $proddomain) > -1))) {
-                $linkType = 'file';
-
-                $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' : 'http://';
-
-                $url = str_replace($protocol . $_SERVER['HTTP_HOST'] . '/', '', $url);
-                $url = str_replace('https://' . $proddomain . '/', '', $url);
-
-
-
-                $url = preg_replace('/\#page=([0-9]+)/', '', $url);
-                $fileType = preg_replace('/\#page=([0-9]+)/', '', $fileType);
-            }
-        }
         switch ($linkType) {
             case 'file':
-                if (!empty($this->settings['baseFolder'])) {
-                    $url = str_replace($this->settings['baseFolder'], '', $url);
-                }
                 $this->prepareFileLink($content, $fileType, $linkType, $linkTag, $url);
                 break;
             case 'email':
@@ -71,7 +44,7 @@ class Links
         unset($GLOBALS['TSFE']->register['url']);
 
         if (!$this->buildLink) {
-            $this->tag = $linkTag;
+            $this->tag = $content;
         }
 
         return str_replace("&amp;", "&", $this->tag);
@@ -90,29 +63,17 @@ class Links
     protected function prepareFileLink($content, $fileType, $linkType, $linkTag, $url)
     {
         // Check if there is anything defined for this filetype and if the file exists
-        if (substr($url, 0, 1) == "/") {
-            $url = substr($url, 1);
-        }
 
-        $pattern = '/f=([0-9]+)/';
-        $matchUid = '';
-        if (preg_match($pattern, $url, $matches)) {
+        $fileType = explode('?', $fileType);
+        $fileType = $fileType[0];
 
-            $matchUid = (int)$matches[1];
-            $fileExist = TRUE;
-            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
-            $file = $resourceFactory->getFileObject($matchUid);
+        if (isset($this->settings[$fileType . '.'])) {
 
-            $fileType = $file->getExtension();
-        };
-
-        if (isset($this->settings[$fileType . '.']) && ($fileExist || file_exists($url))) {
             $settings = $this->settings[$fileType . '.'];
             ksort($settings);
 
             foreach ($settings as $data) {
-
-                switch (str_replace('.', '', key($data))) {
+                switch (key($data)) {
                     case 'image':
                         $this->tag .= $this->insertImage($data, $linkTag);
                         break;
@@ -155,6 +116,7 @@ class Links
                 }
             }
         }
+
         // Check if there are any default settings and if the file exists
         elseif (isset($this->settings['default.']) && file_exists($url)) {
             $settings = $this->settings['default.'];
@@ -196,32 +158,6 @@ class Links
 
                     case 'string':
                         $this->tag .= $this->insertString($data, $linkTag);
-                        break;
-                }
-            }
-        }
-
-        // Check if there are any settings if the file doesn't exist
-        elseif (!file_exists($url) && isset($this->settings['notFound.'])) {
-            $settings = $this->settings['notFound.'];
-            ksort($settings);
-
-            foreach ($settings as $data) {
-                switch (key($data)) {
-                    case 'image':
-                        $this->tag .= $this->insertImage($data, $linkTag);
-                        break;
-
-                    case 'string':
-                        $this->tag .= $this->insertString($data, $linkTag);
-                        break;
-
-                    case 'linkText':
-                        $this->tag .= $this->insertLinkText($data, $content);
-                        break;
-
-                    case 'linkTag':
-                        $this->tag .= $this->insertLink($data, $content, $url);
                         break;
                 }
             }
@@ -360,9 +296,14 @@ class Links
 
         if (count($settings)) {
             ksort($settings);
+
             foreach ($settings as $data) {
                 switch (key($data)) {
                     case 'image':
+
+                        if (strpos($content, '<img') !== FALSE) {
+                            break;
+                        }
                         if (!empty($this->tag)) {
                             $this->tag .= $this->separator;
                         }
@@ -382,8 +323,14 @@ class Links
                             $image = $data['image'];
                             $alt = isset($data['image.']['alt']) ? $data['image.']['alt'] : '';
                         }
-                        $image = $this->resolveImageName($image);
-                        $imageTag = '<img src="' . $image . '" alt="' . $alt . '"/>';
+                        if (!strcmp(substr($image, 0, 4), 'EXT:')) {
+                            // Get rid of 'EXT:'
+                            $image = substr($image, 4);
+                            list($ext, $path) = explode('/', $image, 2);
+                            $extRelPath = substr(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($ext), strlen(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/'));
+                            $image = $extRelPath . $path;
+                        }
+                        $imageTag = file_exists($image) ? '<img src="' . $image . '" alt="' . $alt . '"/>' : '';
 
                         // Add link if configured
                         if (isset($data['image.']['link']) && $data['image.']['link'] == 1) {
@@ -418,17 +365,6 @@ class Links
         }
     }
 
-
-    private function resolveImageName($image)
-    {
-        if (!strcmp(substr($image, 0, 4), 'EXT:')) {
-            $image = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($image));
-        }
-        return $image;
-    }
-
-
-
     /**
      * Adds an image.
      *
@@ -440,30 +376,39 @@ class Links
     {
         $img = '';
 
-        $image = $this->resolveImageName($data['image']);
-
-        if (!empty($this->tag)) {
-            if (isset($data['separator'])) {
-                $img .= $data['separator'];
-            } else {
-                $img .= $this->separator;
-            }
+        $image = $data['image'];
+        if (!strcmp(substr($image, 0, 4), 'EXT:')) {
+            // Get rid of 'EXT:'
+            $image = substr($image, 4);
+            list($ext, $path) = explode('/', $image, 2);
+            $extRelPath = substr(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($ext), strlen(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/'));
+            $image = $extRelPath . $path;
         }
 
-        if (isset($data['image.']['link']) && $data['image.']['link'] == 1) {
-            if (isset($data['image.']['alt'])) {
-                $img .= $linkTag . '<img class="ico-mailto" width="18" height="16px" src="' . $image . '" alt="' . $data['image.']['alt'] . '" /></a>';
-            } else {
-                $img .= $linkTag . '<img class="ico-mailto" width="18" height="16px" src="' . $image . '" alt="" /></a>';
+        if (file_exists($image)) {
+            if (!empty($this->tag)) {
+                if (isset($data['separator'])) {
+                    $img .= $data['separator'];
+                } else {
+                    $img .= $this->separator;
+                }
             }
-        } else {
-            if (isset($data['image.']['alt'])) {
-                $img .= '<img class="ico-mailto" width="18" height="16px" src="' . $image . '" alt="' . $data['image.']['alt'] . '" />';
+
+            if (isset($data['image.']['link']) && $data['image.']['link'] == 1) {
+                if (isset($data['image.']['alt'])) {
+                    $img .= $linkTag . '<img src="' . $image . '" alt="' . $data['image.']['alt'] . '" /></a>';
+                } else {
+                    $img .= $linkTag . '<img src="' . $image . '" alt="" /></a>';
+                }
             } else {
-                $img .= '<img class="ico-mailto" width="18" height="16px" src="' . $image . '" alt="" />';
+                if (isset($data['image.']['alt'])) {
+                    $img .= '<img src="' . $image . '" alt="' . $data['image.']['alt'] . '" />';
+                } else {
+                    $img .= '<img src="' . $image . '" alt="" />';
+                }
             }
+            $this->buildLink = true;
         }
-        $this->buildLink = true;
 
         return $img;
     }
@@ -589,14 +534,13 @@ class Links
         if (isset($data['linkText']) && $data['linkText'] == 1) {
             if (!empty($this->tag)) {
                 if (isset($data['separator'])) {
-                    // $linkText .= $data['separator'];
+                    $linkText .= $data['separator'];
                 } else {
-                    // $linkText .= $this->separator;
+                    $linkText .= $this->separator;
                 }
             }
 
             $expr = '/<a.+?>(.*)(<\/a>)/';
-            $content = str_replace("\n", '', $content);
             preg_match($expr, $content, $parts);
             $linkText .= $parts[1];
         }
@@ -645,11 +589,11 @@ class Links
             }
 
             $units = array(
-                '0' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('bytes', 'TmMlLinks'),
-                '1' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('KB', 'TmMlLinks'),
-                '2' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('MB', 'TmMlLinks'),
-                '3' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('GB', 'TmMlLinks'),
-                '4' => \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('TB', 'TmMlLinks'),
+                '0' => $this->pi_getLL('bytes'),
+                '1' => $this->pi_getLL('KB'),
+                '2' => $this->pi_getLL('MB'),
+                '3' => $this->pi_getLL('GB'),
+                '4' => $this->pi_getLL('TB'),
             );
 
             $j = 0;
@@ -794,11 +738,10 @@ class Links
      * @param	array		$conf
      * @return	string
      */
-    public function getFiletype(\TYPO3\CMS\Frontend\Typolink\LinkResult $content, $conf)
+    public function getFiletype(array $content, $conf)
     {
-        //
         // Get file extension
-        $file = basename($content->getUrl());
+        $file = basename($content['url']);
         if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
             $ext = strtolower($reg[2]);
             $ext = ($ext === 'jpeg') ? 'jpg' : $ext;
@@ -806,14 +749,15 @@ class Links
         $GLOBALS['TSFE']->register['fileType'] = $ext;
 
         // Get link type
-        $GLOBALS['TSFE']->register['linkType'] = $content->getType();
+        $GLOBALS['TSFE']->register['linkType'] = $content['TYPE'];
 
         // Get link url
-        $GLOBALS['TSFE']->register['url'] = $content->getUrl();
+        $GLOBALS['TSFE']->register['url'] = $content['url'];
 
         // Get link tag
-        $GLOBALS['TSFE']->register['tag'] = $content->getHtml();
+        $GLOBALS['TSFE']->register['tag'] = $content['TAG'];
 
-        return $content->getHtml();
+        return $content['TAG'];
     }
 }
+
