@@ -3,6 +3,8 @@
 namespace Toumoro\TmMlLinks\Utility;
 
 class Links  {
+
+    public $buildLink = false;
     /**
      * Main action
      *
@@ -11,7 +13,10 @@ class Links  {
 
         $this->settings = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_tmmllinks.'];
 
-        $fileType = $GLOBALS['TSFE']->register['fileType'];
+	$fileType ='';
+	if (isset($GLOBALS['TSFE']->register['fileType'])) {
+	    $fileType = $GLOBALS['TSFE']->register['fileType'];
+	}
         $linkType = $GLOBALS['TSFE']->register['linkType'];
         $linkTag = $GLOBALS['TSFE']->register['tag'];
         $url = urldecode($GLOBALS['TSFE']->register['url']);
@@ -41,7 +46,7 @@ class Links  {
         unset($GLOBALS['TSFE']->register['tag']);
         unset($GLOBALS['TSFE']->register['url']);
         
-        if (!$this->buildLink) {
+        if (!$this->buildLink ?? false) {
             $this->tag = $content;
         }
 
@@ -729,8 +734,8 @@ class Links  {
         if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
             $ext = strtolower($reg[2]);
             $ext = ($ext === 'jpeg') ? 'jpg' : $ext;
+	    $GLOBALS['TSFE']->register['fileType'] = $ext;
         }
-        $GLOBALS['TSFE']->register['fileType'] = $ext;
 
         // Get link type
         $GLOBALS['TSFE']->register['linkType'] = $content['TYPE'];
