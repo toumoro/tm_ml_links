@@ -12,6 +12,8 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 class Links
 {
 
+    public $buildLink = false;
+
     /**
      * Main action
      *
@@ -21,7 +23,10 @@ class Links
         $this->settings = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getSetupArray()['plugin.']['tx_tmmllinks.'];
 
 
-        $fileType = $GLOBALS['TSFE']->register['fileType'];
+        $fileType = '';
+        if (isset($GLOBALS['TSFE']->register['fileType'])) {
+            $fileType = $GLOBALS['TSFE']->register['fileType'];
+        }
         $linkType = $GLOBALS['TSFE']->register['linkType'];
         $linkTag = $GLOBALS['TSFE']->register['tag'];
         $url = urldecode($GLOBALS['TSFE']->register['url']);
@@ -802,8 +807,8 @@ class Links
         if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
             $ext = strtolower($reg[2]);
             $ext = ($ext === 'jpeg') ? 'jpg' : $ext;
+            $GLOBALS['TSFE']->register['fileType'] = $ext;
         }
-        $GLOBALS['TSFE']->register['fileType'] = $ext;
 
         // Get link type
         $GLOBALS['TSFE']->register['linkType'] = $content->getType();
