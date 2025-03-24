@@ -2,14 +2,12 @@
 
 namespace Toumoro\TmMlLinks\Utility;
 
-class Links
-{
+class Links  {
     /**
      * Main action
      *
      */
-    public function main($content, $conf)
-    {
+    public function main($content, $conf) {
 
         $this->settings = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_tmmllinks.'];
 
@@ -42,12 +40,12 @@ class Links
         unset($GLOBALS['TSFE']->register['linkType']);
         unset($GLOBALS['TSFE']->register['tag']);
         unset($GLOBALS['TSFE']->register['url']);
-
+        
         if (!$this->buildLink) {
             $this->tag = $content;
         }
 
-        return str_replace("&amp;", "&", $this->tag);
+        return str_replace("&amp;","&",$this->tag);
     }
 
     /**
@@ -60,11 +58,10 @@ class Links
      * @param	string		$url
      * @return	void
      */
-    protected function prepareFileLink($content, $fileType, $linkType, $linkTag, $url)
-    {
+    protected function prepareFileLink($content, $fileType, $linkType, $linkTag, $url) {
         // Check if there is anything defined for this filetype and if the file exists
-
-        $fileType = explode('?', $fileType);
+        
+        $fileType = explode('?',$fileType);
         $fileType = $fileType[0];
 
         if (isset($this->settings[$fileType . '.'])) {
@@ -162,6 +159,7 @@ class Links
                 }
             }
         }
+
     }
 
     /**
@@ -174,8 +172,7 @@ class Links
      * @param	string		$url
      * @return	void
      */
-    protected function prepareMailtoLink($content, $fileType, $linkType, $linkTag, $url)
-    {
+    protected function prepareMailtoLink($content, $fileType, $linkType, $linkTag, $url) {
         if (isset($this->settings['mailto.'])) {
             $settings = $this->settings['mailto.'];
             ksort($settings);
@@ -220,8 +217,7 @@ class Links
      * @param	string		$url
      * @return	void
      */
-    protected function preparePageLink($content, $fileType, $linkType, $linkTag, $url)
-    {
+    protected function preparePageLink($content, $fileType, $linkType, $linkTag, $url) {
         if (isset($this->settings['internal.'])) {
             $settings = $this->settings['internal.'];
             ksort($settings);
@@ -266,8 +262,7 @@ class Links
      * @param	string		$url
      * @return	void
      */
-    protected function prepareUrlLink($content, $fileType, $linkType, $linkTag, $url)
-    {
+    protected function prepareUrlLink($content, $fileType, $linkType, $linkTag, $url) {
         $settings = array();
 
         if (isset($this->settings['externalDomain.'])) {
@@ -301,7 +296,7 @@ class Links
                 switch (key($data)) {
                     case 'image':
 
-                        if (strpos($content, '<img') !== FALSE) {
+                        if (strpos($content,'<img') !== FALSE) {
                             break;
                         }
                         if (!empty($this->tag)) {
@@ -372,8 +367,7 @@ class Links
      * @param	string		$linkTag
      * @return	string
      */
-    protected function insertImage(array $data, $linkTag)
-    {
+    protected function insertImage(array $data, $linkTag) {
         $img = '';
 
         $image = $data['image'];
@@ -421,8 +415,7 @@ class Links
      * @param	string		$url
      * @return	string
      */
-    protected function insertLink(array $data, $content, $url)
-    {
+    protected function insertLink(array $data, $content, $url) {
         $link = '';
 
         if ($data['linkTag'] == 1) {
@@ -466,8 +459,7 @@ class Links
      * @param	string url
      * @return	string
      */
-    protected function insertOpeningATag(array $data, $linkTag, $url)
-    {
+    protected function insertOpeningATag(array $data, $linkTag, $url) {
         $openingATag = '';
 
         if (isset($data['openingATag']) && $data['openingATag'] == 1) {
@@ -527,8 +519,7 @@ class Links
      * @param	string		$content
      * @return	string
      */
-    protected function insertLinkText(array $data, $content)
-    {
+    protected function insertLinkText(array $data, $content) {
         $linkText = '';
 
         if (isset($data['linkText']) && $data['linkText'] == 1) {
@@ -554,8 +545,7 @@ class Links
      * @param	array		$data
      * @return	string
      */
-    protected function insertClosingATag(array $data)
-    {
+    protected function insertClosingATag(array $data) {
         $closingATag = '';
 
         if (isset($data['closingATag']) && $data['closingATag'] == 1) {
@@ -575,8 +565,7 @@ class Links
      * @param	string		$linkTag
      * @return	string
      */
-    protected function insertFilesize(array $data, $url, $linkTag)
-    {
+    protected function insertFilesize(array $data, $url, $linkTag) {
         $stringFilesize = '';
 
         if (($data['filesize'] == 1) && file_exists($url)) {
@@ -623,8 +612,7 @@ class Links
      * @param	string		$url
      * @return	string
      */
-    protected function insertDimensions(array $data, $url)
-    {
+    protected function insertDimensions(array $data, $url) {
         $dimensions = '';
 
         if (($data['dimensions'] == 1) && file_exists($url)) {
@@ -654,8 +642,7 @@ class Links
      * @param	string		$url
      * @return	string
      */
-    protected function insertFilename(array $data, $url)
-    {
+    protected function insertFilename(array $data, $url) {
         $filename = '';
 
         if ($data['filename'] == 1) {
@@ -681,8 +668,7 @@ class Links
      * @param	string		$url
      * @return	string
      */
-    protected function insertRevisionDate(array $data, $url)
-    {
+    protected function insertRevisionDate(array $data, $url) {
         $date = '';
 
         if ($data['revisionDate'] == 1 && file_exists($url)) {
@@ -713,8 +699,7 @@ class Links
      * @param	string		$linkTag
      * @return	string
      */
-    protected function insertString(array $data, $linkTag)
-    {
+    protected function insertString(array $data, $linkTag) {
         $string = '';
 
         if (!empty($this->tag) && isset($data['separator'])) {
@@ -738,8 +723,7 @@ class Links
      * @param	array		$conf
      * @return	string
      */
-    public function getFiletype(array $content, $conf)
-    {
+    public function getFiletype(array $content, $conf) {
         // Get file extension
         $file = basename($content['url']);
         if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
@@ -759,5 +743,5 @@ class Links
 
         return $content['TAG'];
     }
-}
 
+}
