@@ -1,7 +1,7 @@
 {
   "name": "toumoro/tm-ml-links",
   "type": "typo3-cms-extension",
-  "description": "Website base files, typoscript, templates, etc.",
+  "description": "Clear typo3temp ",
   "authors": [],
   "require": {
     "typo3/cms-core": "^11.5"
@@ -17,7 +17,8 @@
     }
   },
   "replace": {
-    "typo3-ter/tm-mllinks": "self.version"
+    "tm_ml_links": "self.version",
+    "typo3-ter/tm_ml_links": "self.version"
   },
   "extra": {
     "typo3/cms": {

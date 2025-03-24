@@ -22,6 +22,3 @@ lib.parseFunc_RTE.tags.a.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
 
 lib.parseFunc_RTE.tags.media.tag.typolink.userFunc = Toumoro\TmMlLinks\Utility\Links->getFiletype
 lib.parseFunc_RTE.tags.media.tag.typolink.postUserFunc = Toumoro\TmMlLinks\Utility\Links->main
-
-lib.parseFunc_RTE.htmlSanitize = 0
-lib.parseFunc.htmlSanitize = 0
