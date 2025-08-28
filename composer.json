@@ -4,7 +4,7 @@
   "description": "Website base files, typoscript, templates, etc.",
   "authors": [],
   "require": {
-    "typo3/cms-core": "^12.4"
+    "typo3/cms-core": "^13.4"
   },
   "autoload": {
     "psr-4": {
@@ -17,7 +17,6 @@
     }
   },
   "replace": {
-    "tm_ml_links": "self.version",
     "typo3-ter/tm-mllinks": "self.version"
   },
   "extra": {

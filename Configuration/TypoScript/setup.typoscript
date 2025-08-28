@@ -2,8 +2,8 @@
 # FE-Plugin configuration for EXT:news
 # ==============================================
 plugin.tx_tmmllinks {
-baseFolder= 
-replaceDomain=
+	baseFolder = 
+	replaceDomain =
             separator = &nbsp;
 	
 		## definition for external links
@@ -40,7 +40,7 @@ replaceDomain=
             ##external.10.image.pdf = EXT:tm_ml_links/Resources/Public/Icons/external/pdf.png
 
             mailto {
-                    10.image = EXT:tm_ml_links/Resources/Public/Icons/ICO_courriel.svg
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/mailto.gif
                     10.image.link = 0
                     20.linkTag = 1
             }
@@ -109,35 +109,35 @@ replaceDomain=
 
                     ## Filetypes: MS Office
             doc {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/doc.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/doc.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
             }
 
             docx {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/docx.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/docx.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
             }
 
             pps {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pps.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pps.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
             }
 
             ppt {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/ppt.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/ppt.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
             }
 
             pptx {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pptx.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/pptx.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
@@ -151,14 +151,14 @@ replaceDomain=
             }
 
             xls {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xls.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xls.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
             }
 
             xlsx {
-                    ##10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xlsx.png
+                    10.image = EXT:tm_ml_links/Resources/Public/Icons/filetypes/xlsx.png
                     10.image.link = 0
                     20.linkTag = 1
                     ##30.filesize = 1
