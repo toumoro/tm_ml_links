@@ -3,10 +3,11 @@
 namespace Toumoro\TmMlLinks\Utility;
 
 use AllowDynamicProperties;
-use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Frontend\Typolink\LinkResult;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
+
 
 #[AllowDynamicProperties]
 class Links
@@ -101,17 +102,17 @@ class Links
 
         $pattern = '/f=([0-9]+)/';
         $matchUid = '';
+
         if (preg_match($pattern, $url, $matches)) {
 
             $matchUid = (int)$matches[1];
-            $fileExist = TRUE;
             $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
             $file = $resourceFactory->getFileObject($matchUid);
 
             $fileType = $file->getExtension();
         };
 
-        if (isset($this->settings[$fileType . '.']) && ($fileExist || file_exists($url))) {
+        if (isset($this->settings[$fileType . '.']) && $url) {
             $settings = $this->settings[$fileType . '.'];
             ksort($settings);
 
@@ -160,6 +161,7 @@ class Links
                 }
             }
         }
+
         // Check if there are any default settings and if the file exists
         elseif (isset($this->settings['default.']) && file_exists($url)) {
             $settings = $this->settings['default.'];
@@ -795,20 +797,19 @@ class Links
     /**
      * Gets data of created link.
      *
-     * @param	string		$content
-     * @param	array		$conf
+     * @param	LinkResult $content
+     * @param	string $conf
      * @return	string
      */
-    public function getFiletype(\TYPO3\CMS\Frontend\Typolink\LinkResult $content, $conf)
+    public function getFiletype(LinkResult $content, $conf)
     {
-        //
+
         // Get file extension
         $file = basename($content->getUrl());
-        if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
-            $ext = strtolower($reg[2]);
-            $ext = ($ext === 'jpeg') ? 'jpg' : $ext;
-            $GLOBALS['TSFE']->register['fileType'] = $ext;
-        }
+        $ext = preg_replace('/\?.*/', '', strtolower(pathinfo($file, PATHINFO_EXTENSION)));
+        $ext = ($ext === 'jpeg') ? 'jpg' : $ext;
+
+        $GLOBALS['TSFE']->register['fileType'] = $ext;
 
         // Get link type
         $GLOBALS['TSFE']->register['linkType'] = $content->getType();
