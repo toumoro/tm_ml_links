@@ -23,14 +23,14 @@ class Links
     {
         $this->settings = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getSetupArray()['plugin.']['tx_tmmllinks.'];
 
-
         $fileType = '';
         if (isset($GLOBALS['TSFE']->register['fileType'])) {
             $fileType = $GLOBALS['TSFE']->register['fileType'];
         }
         $linkType = $GLOBALS['TSFE']->register['linkType'];
-        $linkTag = $GLOBALS['TSFE']->register['tag'];
+        $content = $linkTag = $GLOBALS['TSFE']->register['tag'];
         $url = urldecode($GLOBALS['TSFE']->register['url']);
+
         // Use given seperator
         $this->separator = isset($this->settings['separator']) ? $this->settings['separator'] : ' ';
         $this->tag = '';
