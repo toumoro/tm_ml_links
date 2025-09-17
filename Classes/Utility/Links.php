@@ -374,6 +374,7 @@ class Links
                             $this->tag .= $this->separator;
                         }
 
+                        $ext = FALSE;
                         // Get filetype
                         $file = basename($url);
                         if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
@@ -382,7 +383,7 @@ class Links
                         }
 
                         // Add image
-                        if (isset($data['image.'][$ext])) {
+                        if (($ext) && (isset($data['image.'][$ext]))) {
                             $image = $data['image.'][$ext];
                             $alt = isset($data['image.'][$ext]['alt']) ? $data['image.'][$ext]['alt'] : '';
                         } else {
