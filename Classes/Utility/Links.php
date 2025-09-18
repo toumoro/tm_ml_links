@@ -28,7 +28,7 @@ class Links
             $fileType = $GLOBALS['TSFE']->register['fileType'];
         }
         $linkType = $GLOBALS['TSFE']->register['linkType'] ?? '';
-        $content = $linkTag = $GLOBALS['TSFE']->register['tag'];
+        $content = $linkTag = $GLOBALS['TSFE']->register['tag'] ?? '';
         $url = urldecode($GLOBALS['TSFE']->register['url'] ?? '');
 
         // Use given seperator
