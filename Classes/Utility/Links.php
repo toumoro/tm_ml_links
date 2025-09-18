@@ -80,8 +80,8 @@ class Links
             $this->tag = $linkTag;
         }
 
-        if (empty($this->tag)) {
-            $this->tag = $content;
+        if ($this->tag === NULL) {
+            $this->tag = '';
         }
         return str_replace("&amp;", "&", $this->tag);
     }
