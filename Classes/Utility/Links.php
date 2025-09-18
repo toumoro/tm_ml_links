@@ -27,9 +27,9 @@ class Links
         if (isset($GLOBALS['TSFE']->register['fileType'])) {
             $fileType = $GLOBALS['TSFE']->register['fileType'];
         }
-        $linkType = $GLOBALS['TSFE']->register['linkType'];
+        $linkType = $GLOBALS['TSFE']->register['linkType'] ?? '';
         $content = $linkTag = $GLOBALS['TSFE']->register['tag'];
-        $url = urldecode($GLOBALS['TSFE']->register['url']);
+        $url = urldecode($GLOBALS['TSFE']->register['url'] ?? '');
 
         // Use given seperator
         $this->separator = isset($this->settings['separator']) ? $this->settings['separator'] : ' ';
