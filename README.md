@@ -1,5 +1,6 @@
+ENGLISH FOLLOW 
+
 # Liens étendus Toumoro (tm_ml_links)
-ENGLISH FOLLOW BELOW
 
 Cette extension TYPO3 améliore le rendu standard des liens en fournissant des icônes et des informations supplémentaires pour différents types de liens. C'est une réécriture moderne de l'extension `ml_links`, compatible avec TYPO3 v13.4.
 
