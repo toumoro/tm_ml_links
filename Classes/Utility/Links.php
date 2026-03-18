@@ -27,9 +27,9 @@ class Links
         if (isset($GLOBALS['TSFE']->register['fileType'])) {
             $fileType = $GLOBALS['TSFE']->register['fileType'];
         }
-        $linkType = $GLOBALS['TSFE']->register['linkType'];
-        $content = $linkTag = $GLOBALS['TSFE']->register['tag'];
-        $url = urldecode($GLOBALS['TSFE']->register['url']);
+        $linkType = $GLOBALS['TSFE']->register['linkType'] ?? '';
+        $content = $linkTag = $GLOBALS['TSFE']->register['tag'] ?? '';
+        $url = urldecode($GLOBALS['TSFE']->register['url'] ?? '');
 
         // Use given seperator
         $this->separator = isset($this->settings['separator']) ? $this->settings['separator'] : ' ';
@@ -80,6 +80,9 @@ class Links
             $this->tag = $linkTag;
         }
 
+        if ($this->tag === NULL) {
+            $this->tag = '';
+        }
         return str_replace("&amp;", "&", $this->tag);
     }
 
@@ -374,6 +377,7 @@ class Links
                             $this->tag .= $this->separator;
                         }
 
+                        $ext = FALSE;
                         // Get filetype
                         $file = basename($url);
                         if (preg_match('/(.*)\.([^\.]*$)/', $file, $reg)) {
@@ -382,7 +386,7 @@ class Links
                         }
 
                         // Add image
-                        if (isset($data['image.'][$ext])) {
+                        if (($ext) && (isset($data['image.'][$ext]))) {
                             $image = $data['image.'][$ext];
                             $alt = isset($data['image.'][$ext]['alt']) ? $data['image.'][$ext]['alt'] : '';
                         } else {
